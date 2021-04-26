@@ -196,7 +196,7 @@ device = bert_set_device()
 model_bert = finetune_bert(train_texts, train_labels, "finetuned_BERT_for_newsela.pt", device)
 
 # # When loading from model:
-model_bert = load_bert("finetuned_BERT_for_newsela.pt")
+model_bert = load_bert("finetuned_BERT_for_newsela.pt",device)
 
 # # Make sure that model is loaded to whichever device that is being used
 model_bert = model_bert.to(device)
