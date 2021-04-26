@@ -10,10 +10,10 @@ from cohesive_indices import read_cohesive_indices, concatenate_bert, with_TFIDF
 import sys
 
 
-# Log all results in a file
-logger = open('results.log', 'a', encoding='utf-8', errors='ignore')
-sys.stdout = logger
-sys.stderr = logger
+# # Log all results in a file
+# logger = open('results.log', 'a', encoding='utf-8', errors='ignore')
+# sys.stdout = logger
+# sys.stderr = logger
 
 
 # Load data using sklearn's load_files function
@@ -109,15 +109,8 @@ f_X = f_words_df
 f_y = filtered_train_labels
 
 
-###
-print('*'*80)
-print('*'*80)
-print('with ngram- Train models without removing stop words.')
 
 
-print('*'*80)
-print('*'*80)
-print('with ngram-Train models after removing stop words.')
 
 ### Prepare test data
 print('*'*80)
@@ -131,12 +124,20 @@ f_X_test = f_words_df
 f_y_test = filtered_test_labels
 print('Test data was prepared')
 
+###
+print('*'*80)
+print('*'*80)
+print('with ngram- Train models without removing stop words.')
 
 ngram_svm_results = svmResults(randomSeed,X,y,y_test,X_test,'ngramSVM')
 ngram_nb_results = nbResults(randomSeed,X,y,y_test,X_test,'ngramNB')
 ngram_rf_results = rfResults(randomSeed,X,y,y_test,X_test,'ngramForest')
 ngram_lr_results = lrResults(randomSeed,X,y,y_test,X_test,'ngramLogisticRegression')
 
+
+print('*'*80)
+print('*'*80)
+print('with ngram-Train models after removing stop words.')
 
 f_ngram_svm_results = svmResults(randomSeed,f_X, f_y,f_y_test,f_X_test,'ngram_fSVM')
 f_ngram_nb_results = nbResults(randomSeed,f_X, f_y,f_y_test,f_X_test,'ngram_fNB')
@@ -192,19 +193,21 @@ print('---------------BERT------------------------------')
 
 device = bert_set_device()
 
-# Fine-tune and save model (this part is already done):
-model_bert = finetune_bert(train_texts, train_labels, "finetuned_BERT_for_newsela.pt", device)
+# # Fine-tune and save model (this part is already done):
+# model_bert = finetune_bert(train_texts, train_labels, "finetuned_BERT_for_newsela.pt", device)
+# print('---------------Finetuning complete------------------------------')
 
-# # When loading from model:
-model_bert = load_bert("finetuned_BERT_for_newsela.pt",device)
+# When loading from model:
+model_bert = load_bert("finetuned_BERT_for_newsela.pt", device)
 
-# # Make sure that model is loaded to whichever device that is being used
+# Make sure that model is loaded to whichever device that is being used
 model_bert = model_bert.to(device)
 true_labels, pred_labels = test_bert(test_texts, test_labels, model_bert, device)
 
-# # Evaluate BERT using test set and print results
+# Evaluate BERT using test set and print results
 bert_evaluated_df = bert_eval(true_labels, pred_labels)
 print(bert_evaluated_df)
+
 
 print('*'*80)
 print('---------------SVM With Cohesive Indices---------------------------')
@@ -271,7 +274,7 @@ print('*'*80)
 print('---------------Starting with BERT---------------------------')
 true_labels, pred_labels = test_bert(wdata.data, wdata.target, model_bert)
 
-# # Evaluate BERT using test set and print results
+# Evaluate BERT using test set and print results
 bert_evaluated_df = bert_eval(true_labels, pred_labels)
 print(bert_evaluated_df)
 
