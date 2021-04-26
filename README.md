@@ -5,9 +5,9 @@ Group members: Joon Suh Choi, Linlin Lu, Nahom Ogbazghi, Vinayak Renu Nair
 
 ## General Information
 This project uses the Newsela corpus and different word vectorization and machine learning (ML) algorithms to produce models predicting text readability.<br/><br/>
-Word vectorization is done through 1) TF-IDF, and ML algorithms used include 1) SVM, 2) Multinomial Logistic Regression, 3) Naive Bayes, and 4) Random Forest. <br/>Data is fed into these models in the formats of: plain text, ngram, and removed stopwords.
-Deep learning models used are: 1) Fasttext 2) Bert
-## Before start
+Word vectorization is needed to make the data consumable for the models. For the ML algorithms used include 1) SVM, 2) Multinomial Logistic Regression, 3) Naive Bayes, and 4) Transformers that is done through TF-IDF, while FastText and Bert have there own vectorizers.<br/><br/>
+Data is fed into the vectorizers in the formats of: plain text, ngram, and removed stopwords.
+## Before we start
 The dataset files and a fine-tuned bert model can be downloaded from: https://drive.google.com/drive/folders/1C54tPVXpzvXy8aNOvbuMzcJL0Ra87j8x?usp=sharing
 Please download and put this files in the same directory of your project before running the project.
 ## Prerequisite
@@ -40,7 +40,6 @@ All results will be logged in a separate log file, and all plots will be tabulat
 fasttext-0.9.2-cp37-cp37m-win_amd64: fasttext whl for python version 3.7<br/>
 fasttext-0.9.2-cp38-cp38m-win_amd64: fasttext whl for python version 3.8<br/>
 
-
 Newsela_categorized: dataset for training models (and testing models on the same dataset). Five readability clases. File 0 is the most difficult class. File 4 is the easiest class.<br/>
 newsela_features_cohesion_selected.csv: cohesive dataset<br/>
 WeeBit-TextOnly_categorized_fortesting: dataset for testing models on a different dataset.<br/>
@@ -54,3 +53,13 @@ bert_related.py: bert related python file<br/>
 
 ResultExample: stores result examples after running the projects.<br/>
 results.log: recording the running results of the main python file.<br/>
+
+## Results
+The code was ran on our local computer and the results are saved in the results.log file, and all plots are tabulated on separate png files.<br/><br/>
+To log your own results, uncomment out the following three lines of code in ML_NLP.py
+```
+# Log all results in a file
+logger = open('results.log', 'a', encoding='utf-8', errors='ignore')
+sys.stdout = logger
+sys.stderr = logger
+```
