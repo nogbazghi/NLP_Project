@@ -5,7 +5,7 @@ Group members: Joon Suh Choi, Linlin Lu, Nahom Ogbazghi, Vinayak Renu Nair
 
 ## General Information
 This project uses the Newsela corpus and different word vectorization and machine learning (ML) algorithms to produce models predicting text readability.<br/><br/>
-Word vectorization is done through 1) TF-IDF, 2) FastText, and 3) Bert, and ML algorithms used include 1) SVM, 2) Multinomial Logistic Regression, 3) Naive Bayes, and 4) Transformers.<br/>Data is fed into these models in the formats of: plain text, ngram, and removed stopwords.
+Word vectorization is needed to make the data consumable for the models. For the ML algorithms used include 1) SVM, 2) Multinomial Logistic Regression, 3) Naive Bayes, and 4) Transformers that is done through TF-IDF, while FastText and Bert have there own vectorizers.<br/>Data is fed into the vectorizers in the formats of: plain text, ngram, and removed stopwords.
 
 ##Contributions
 Joon Suh Choi:
