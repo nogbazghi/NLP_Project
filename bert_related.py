@@ -75,7 +75,7 @@ def format_time(elapsed):
 
 
 # Function to fine-tune Bert
-def finetune_bert(train_texts, train_labels, filename, device):
+def finetune_bert(train_texts, train_labels, filename, device, epochs=4):
     # Load the BERT tokenizer.
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
@@ -155,7 +155,10 @@ def finetune_bert(train_texts, train_labels, filename, device):
     )
 
     # Tell pytorch to run this model on the GPU.
-    model.cuda()
+    try:
+        model.cuda()
+    except AssertionError:
+        pass
 
     # Get all of the model's parameters as a list of tuples.
     params = list(model.named_parameters())
@@ -187,7 +190,7 @@ def finetune_bert(train_texts, train_labels, filename, device):
 
     # Number of training epochs. The BERT authors recommend between 2 and 4.
     # I will choose to run 2 epochs.
-    epochs = 4
+    epochs = epochs
 
     # Total number of training steps is [number of batches] x [number of epochs].
     # (Note that this is not the same as the number of training samples).
@@ -205,7 +208,10 @@ def finetune_bert(train_texts, train_labels, filename, device):
     random.seed(seed_val)
     np.random.seed(seed_val)
     torch.manual_seed(seed_val)
-    torch.cuda.manual_seed_all(seed_val)
+    try:
+        torch.cuda.manual_seed_all(seed_val)
+    except AttributeError:
+        pass
 
     # We'll store a number of quantities such as training and validation loss,
     # validation accuracy, and timings.
@@ -279,11 +285,19 @@ def finetune_bert(train_texts, train_labels, filename, device):
             # https://huggingface.co/transformers/main_classes/output.html#transformers.modeling_outputs.SequenceClassifierOutput
             # Specifically, we'll get the loss (because we provided labels) and the
             # "logits"--the model outputs prior to activation.
-            result = model(b_input_ids,
-                           token_type_ids=None,
-                           attention_mask=b_input_mask,
-                           labels=b_labels,
-                           return_dict=True)
+
+            try:
+                result = model(b_input_ids,
+                               token_type_ids=None,
+                               attention_mask=b_input_mask,
+                               labels=b_labels,
+                               return_dict=True)
+            except RuntimeError:
+                result = model(b_input_ids.long(),
+                               token_type_ids=None,
+                               attention_mask=b_input_mask.long(),
+                               labels=b_labels.long(),
+                               return_dict=True)
 
             loss = result.loss
             logits = result.logits
@@ -362,11 +376,18 @@ def finetune_bert(train_texts, train_labels, filename, device):
                 # Forward pass, calculate logit predictions.
                 # token_type_ids is the same as the "segment ids", which
                 # differentiates sentence 1 and 2 in 2-sentence tasks.
-                result = model(b_input_ids,
-                               token_type_ids=None,
-                               attention_mask=b_input_mask,
-                               labels=b_labels,
-                               return_dict=True)
+                try:
+                    result = model(b_input_ids,
+                                   token_type_ids=None,
+                                   attention_mask=b_input_mask,
+                                   labels=b_labels,
+                                   return_dict=True)
+                except RuntimeError:
+                    result = model(b_input_ids.long(),
+                                   token_type_ids=None,
+                                   attention_mask=b_input_mask.long(),
+                                   labels=b_labels.long(),
+                                   return_dict=True)
 
             # Get the loss and "logits" output by the model. The "logits" are the
             # output values prior to applying an activation function like the
@@ -484,11 +505,19 @@ def test_bert(test_texts, test_labels, model, device):
       # Telling the model not to compute or store gradients, saving memory and
       # speeding up prediction
       with torch.no_grad():
-          # Forward pass, calculate logit predictions.
-          result = model(b_input_ids,
-                         token_type_ids=None,
-                         attention_mask=b_input_mask,
-                         return_dict=True)
+        # Forward pass, calculate logit predictions.
+        try:
+            result = model(b_input_ids,
+                           token_type_ids=None,
+                           attention_mask=b_input_mask,
+                           labels=b_labels,
+                           return_dict=True)
+        except RuntimeError:
+            result = model(b_input_ids.long(),
+                           token_type_ids=None,
+                           attention_mask=b_input_mask.long(),
+                           labels=b_labels.long(),
+                           return_dict=True)
 
       logits = result.logits
 
