@@ -36,7 +36,7 @@ Run ML_NLP.py and it will train all models and print the outputs.
 python ML_NLP.py
 ```
 
-All results will be logged in a separate log file, and all plots will be tabulated on separate png files.
+All results will be logged in a separate log file (if the logger is uncommented out), and all plots will be tabulated on separate png files.
 
 ## About the files
 fasttext-0.9.2-cp37-cp37m-win_amd64: fasttext whl for python version 3.7<br/>
