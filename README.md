@@ -41,7 +41,8 @@ All results will be logged in a separate log file, and all plots will be tabulat
 fasttext-0.9.2-cp37-cp37m-win_amd64: fasttext whl for python version 3.7<br/>
 
 Newsela_categorized: dataset for training models (and testing models on the same dataset). Five readability clases. File 0 is the most difficult class. File 4 is the easiest class.<br/>
-newsela_features_cohesion_selected.csv: cohesive features extracted from Newsela<br/>
+newsela_features_cohesion_selected.csv: cohesive features extracted from Newsela.<br/>
+weebit_features_cohesion_selected.csv: cohesive features extracted from Weebit.<br/><br/>
 WeeBit-TextOnly_categorized_fortesting: dataset for testing models on a different dataset.<br/>
 
 finetuned_BERT_for_newsela.pt : fine-tuned bert model<br/>
@@ -55,8 +56,8 @@ ResultExample: stores result examples after running the projects.<br/>
 results.log: recording the running results of the main python file.<br/>
 
 ## Results
-The code was ran on our local computer and the results are saved in the results.log file, and all plots are tabulated on separate png files.<br/><br/>
-To log your own results, uncomment out the following three lines of code in ML_NLP.py
+The code was ran on our local machine and the results of the models were logged in the results.log file, and all plots were tabulated on separate png files.<br/><br/>
+To log your own results, please uncomment out the following three lines of code in ML_NLP.py
 ```
 # Log all results in a file
 logger = open('results.log', 'a', encoding='utf-8', errors='ignore')
