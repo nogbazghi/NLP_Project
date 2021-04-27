@@ -16,9 +16,27 @@ An NVIDIA GPU and CUDA toolkit is required for the code to run on GPU.<br/>
 <br/>Python versions: 3.7-3.9<br/>
 The project was tested in Python 3.7.1. to match the Python version used in Google Colab.
 
-## Dependencies used 
-pickle, fasttext, pandas, tensorflow, torch, transformers, scipy, os, pandas, numpy, nltk, warnings, tabulate, sklearn, matplotlib.pyplot, seaborn, random
-
+## Dependencies
+**Deep Learning**
+- transformers
+- tensorflow
+- fasttext
+- sklearn
+- torch
+<!-- end of the list -->
+**Data Management**
+- pandas
+- numpy
+- scipy
+<!-- end of the list -->
+**Plotting**
+- matplotlib
+- tabulate
+- seaborn
+<!-- end of the list -->
+**NLP**
+- nltk
+<!-- end of the list -->
 ## Getting Started
 Create a new virtual environment and activate it by executing activate.bat
 ```
