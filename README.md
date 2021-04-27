@@ -20,7 +20,7 @@ Create a new virtual environment and activate it by executing activate.bat
 ```
 python -m venv <NAME OF NEW ENVIRONMENT>
 ```
-Install fasttext using separate wheel. (the included wheel is for Python versions 3.7 and 3.8. Wheels for other versions can be found here: https://pypi.bartbroe.re/fasttext/)
+Install fasttext using separate wheel. (the included wheel is for Python version 3.7. Wheels for other versions can be found here: https://pypi.bartbroe.re/fasttext/)
 ```
 pip install fasttext-0.9.2-cp37-cp37m-win_amd64.whl
 ```
@@ -39,10 +39,9 @@ All results will be logged in a separate log file, and all plots will be tabulat
 
 ## About the files
 fasttext-0.9.2-cp37-cp37m-win_amd64: fasttext whl for python version 3.7<br/>
-fasttext-0.9.2-cp38-cp38m-win_amd64: fasttext whl for python version 3.8<br/>
 
 Newsela_categorized: dataset for training models (and testing models on the same dataset). Five readability clases. File 0 is the most difficult class. File 4 is the easiest class.<br/>
-newsela_features_cohesion_selected.csv: cohesive dataset<br/>
+newsela_features_cohesion_selected.csv: cohesive features extracted from Newsela<br/>
 WeeBit-TextOnly_categorized_fortesting: dataset for testing models on a different dataset.<br/>
 
 finetuned_BERT_for_newsela.pt : fine-tuned bert model<br/>
