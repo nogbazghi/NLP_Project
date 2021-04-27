@@ -13,7 +13,7 @@ Please download and put this files in the same directory of your project before 
 ## Prerequisite
 This project has been tested and installed on Windows. For optimal performance using a device with GPUs will significantly speed up BERT tuning. If the device used does not have GPUs the CPU will be used instead for tuning and that could potentially take hours.<br/>
 An NVIDIA GPU and CUDA toolkit is required for the code to run on GPU.<br/>
-<br/>Python version: 3.7-3.9<br/>
+<br/>Python versions: 3.7-3.9<br/>
 The project was tested in Python 3.7.1. to match the Python version used in Google Colab.
 
 ## Getting Started
